@@ -17,16 +17,19 @@ interface BookDao {
     fun getBookByIsbn(isbn: String): LiveData<Book>
 
     @Query("SELECT * from book_table WHERE title= :title")
-    fun getBookByTitle(title: String): Book
+    fun getBookByTitle(title: String): LiveData<Book>
 
     @Query("SELECT * from book_table WHERE editorial= :editorial")
-    fun getBookByEditorial(editorial: String): Book
+    fun getBookByEditorial(editorial: String): LiveData<Book>
 
     @Query("SELECT * from book_table WHERE authors= :authors")
-    fun getBookByAuthors(authors: List<Author>): Book
+    fun getBookByAuthors(authors: List<Author>): LiveData<Book>
 
     @Query("SELECT * from book_table WHERE tags= :tags")
-    fun getBookByTag(tags: List<Tag>): Book
+    fun getBookByTags(tags: List<Tag>): LiveData<Book>
+
+    @Query("SELECT * from book_table WHERE favourite= :preference")
+    fun getBookByFavourite(preference: Boolean): LiveData<Book>
 
 
 
