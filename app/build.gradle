@@ -10,7 +10,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.library"
+        applicationId "com.echavez.bookdex"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
