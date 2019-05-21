@@ -17,20 +17,19 @@ interface BookDao {
     fun getBookByIsbn(isbn: String): LiveData<Book>
 
     @Query("SELECT * from book_table WHERE title= :title")
-    fun getBookByTitle(title: String): List<LiveData<Book>>
+    fun getBookByTitle(title: String): LiveData<Book>
 
     @Query("SELECT * from book_table WHERE editorial= :editorial")
-    fun getBookByEditorial(editorial: String): List<LiveData<Book>>
+    fun getBookByEditorial(editorial: String): LiveData<List<Book>>
 
-    @Query("SELECT * from book_table WHERE authors= :authors")
-    fun getBookByAuthors(authors: List<Author>): List<LiveData<Book>>
+    //@Query("SELECT * from book_table WHERE authors= :authors")
+    //fun getBookByAuthors(authors: List<Author>): List<LiveData<Book>>
 
-    @Query("SELECT * from book_table WHERE tags= :tags")
-    fun getBookByTags(tags: List<Tag>): List<LiveData<Book>>
+//    @Query("SELECT * from book_table WHERE tags= :tags")
+  //  fun getBookByTags(tags: List<Tag>): List<LiveData<Book>>
 
-    @Query("SELECT * from book_table WHERE favourite= :preference")
-    fun getBookByFavourite(preference: Boolean): List<LiveData<Book>>
-
+    @Query("SELECT * from book_table WHERE favourite= true")
+    fun getBooksByFavourite(): LiveData<List<Book>>
 
 
     //Get all
@@ -45,5 +44,7 @@ interface BookDao {
     @Query("UPDATE book_table SET favourite = :preference WHERE isbn = :isbn")
     fun favourite(isbn: String, preference: Boolean)
 
+    @Query("DELETE FROM book_table")
+    fun deleteAll()
 
 }

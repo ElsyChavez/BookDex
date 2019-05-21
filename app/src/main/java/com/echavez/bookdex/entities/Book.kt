@@ -12,7 +12,7 @@ data class Book(
     @ColumnInfo(name = "edition") val edition: String,
     @ColumnInfo(name = "editorial") val editorial: String,
     @ColumnInfo(name = "summary") val summary: String,
-    @ColumnInfo(name = "authors") val authors: List<Author>,
-    @ColumnInfo(name = "tags") val tags: List<Tag>,
+   //@ColumnInfo(name = "authors") val authors: List<Author>,
+    //@ColumnInfo(name = "tags") val tags: List<Tag>,
     @ColumnInfo(name = "favourite") val favourite: Boolean
 )
