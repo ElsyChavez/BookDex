@@ -1,15 +1,15 @@
-package com.example.library.database
+package com.echavez.bookdex.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.library.dao.AuthorDao
-import com.example.library.dao.BookDao
-import com.example.library.dao.TagDao
-import com.example.library.entities.Author
-import com.example.library.entities.Book
-import com.example.library.entities.Tag
+import com.echavez.bookdex.dao.AuthorDao
+import com.echavez.bookdex.dao.BookDao
+import com.echavez.bookdex.dao.TagDao
+import com.echavez.bookdex.entities.Author
+import com.echavez.bookdex.entities.Book
+import com.echavez.bookdex.entities.Tag
 
 
 @Database(entities = arrayOf(Book::class, Author::class, Tag::class), version = 1)
