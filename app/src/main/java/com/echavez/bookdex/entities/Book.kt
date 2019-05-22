@@ -13,6 +13,6 @@ data class Book(
     @ColumnInfo(name = "editorial") val editorial: String,
     @ColumnInfo(name = "summary") val summary: String,
    //@ColumnInfo(name = "authors") val authors: List<Author>,
-    //@ColumnInfo(name = "tags") val tags: List<Tag>,
+    @ColumnInfo(name = "tag") val tag: Long,  //Trae como fk de la tabla Tag
     @ColumnInfo(name = "favourite") val favourite: Boolean
 )

@@ -25,8 +25,6 @@ interface BookDao {
     //@Query("SELECT * from book_table WHERE authors= :authors")
     //fun getBookByAuthors(authors: List<Author>): List<LiveData<Book>>
 
-//    @Query("SELECT * from book_table WHERE tags= :tags")
-  //  fun getBookByTags(tags: List<Tag>): List<LiveData<Book>>
 
     @Query("SELECT * from book_table WHERE favourite= true")
     fun getBooksByFavourite(): LiveData<List<Book>>

@@ -27,7 +27,7 @@ public abstract class BookDexDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: BookDexDatabase? = null
 
-        fun getDatabase(context: Context): BookDexDatabase {
+        fun getDatabase(context: Context, scope: CoroutineScope): BookDexDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -37,7 +37,10 @@ public abstract class BookDexDatabase : RoomDatabase() {
                         context.applicationContext,
                         BookDexDatabase::class.java,
                         "BookDex_database"
-                ).build()
+                )
+                        .fallbackToDestructiveMigration()
+                        .addCallback(BookDexDatabaseCallback(scope))
+                        .build()
                 INSTANCE = instance
                 return instance
             }
@@ -51,16 +54,26 @@ public abstract class BookDexDatabase : RoomDatabase() {
 
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
-                        populateDatabase(database.bookDao())
+                        populateDatabase(database.bookDao(), database.tagDao(), database.authorDao())
                     }
                 }
             }
         }
 
-        suspend fun populateDatabase(bookDao: BookDao) {
+        suspend fun populateDatabase(bookDao: BookDao , tagDao: TagDao, authorDao: AuthorDao) {
             bookDao.deleteAll()
-            var book = Book("4213432324", "https://www.abc.es/media/familia/2018/04/06/PORTADA-ELPRINCIPITO-kwpB--620x349@abc.JPG", "El principito", "1ra", "El castillo", "Cuenta la hisotira de un pequeño niño que..", true)
+            tagDao.deleteAll()
+
+            var tag = Tag( null,"Ficcion" )
+            tagDao.insertTag(tag)
+            tag= Tag(0, "Politica" )
+            tagDao.insertTag(tag)
+
+            var book = Book("4213432324", "https://www.abc.es/media/familia/2018/04/06/PORTADA-ELPRINCIPITO-kwpB--620x349@abc.JPG", "El principito", "1ra", "El castillo", "Cuenta la hisotira de un pequeño niño que..", 1, true)
             bookDao.insertBook(book)
+            book = Book("2131244523", "http://4.bp.blogspot.com/-YYFDLFIvMGg/VYxRCfAibDI/AAAAAAAAAbc/oOVeVofRQBs/s1600/1984.jpg", "1984", "1ra", "El castillo", "En un futuro cercano distopico donde la tecnologia..", 2, false)
+            bookDao.insertBook(book)
+
         }
     }
 }
