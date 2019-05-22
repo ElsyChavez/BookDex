@@ -8,8 +8,7 @@ import com.echavez.bookdex.entities.Book
 class BookRepository(private val bookDao: BookDao) {
 
     val allBooks: LiveData<List<Book>> = bookDao.getAllBooks()
-
-    val favoritesBooks: LiveData<List<Book>> = bookDao.getBooksByFavourite()
+    val favoritesBooks: LiveData<List<Book>> = bookDao.getBooksByFavourite(true)
 
     @WorkerThread
     suspend fun insert(book: Book) {

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.echavez.bookdex.Adapter.BooksAdapter
 import com.echavez.bookdex.ViewModel.BookViewModel
@@ -13,31 +12,44 @@ import com.echavez.bookdex.entities.Book
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var bookViewModel: BookViewModel
+    lateinit var bookViewModel: BookViewModel
+    private var flag = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var bookAdapter = BooksAdapter(this)
-        rvLibritos.adapter=bookAdapter
-        rvLibritos.layoutManager= LinearLayoutManager(this)
+        var bookAdapter = BooksAdapter(this) { book:Book->bookFavorito(book)}
+        rvLibritos.adapter = bookAdapter
+        rvLibritos.layoutManager = LinearLayoutManager(this)
 
-        bookViewModel= ViewModelProviders.of(this).get(BookViewModel::class.java)
+        bookViewModel = ViewModelProviders.of(this).get(BookViewModel::class.java)
 
-        bookViewModel.allBooks.observe(this, Observer { books->
+        bookViewModel.allBooks.observe(this, Observer { books ->
             bookAdapter.setBooks(books)
         })
+        Log.v("cantidad", bookAdapter.itemCount.toString())
 
 
 
-        //Log.v("tags", bookViewModel.allTags.toString())
-        //bookViewModel.librosFavs()
-        //Log.v("favs", bookViewModel.allBooks.toString())
-
-       // btPrueba.setOnClickListener(){
-         //   bookViewModel.getBooksbyTag(etPruebis.text.toString())
-           // Log.v("libsPorTag", bookViewModel.booksByTag.toString())
-       // }
+        btPrueba.setOnClickListener() {
+            if (flag) {
+                bookViewModel.favBooks.observe(this, Observer { favBooks ->
+                    bookAdapter.setBooks(favBooks)
+                })
+                btPrueba.text = "Cambiar a vista de todos"
+            } else {
+                bookViewModel.allBooks.observe(this, Observer { books ->
+                    bookAdapter.setBooks(books)
+                })
+                btPrueba.text = "Cambiar a Favoritos"
+            }
+            flag = !flag
+        }
     }
+
+    private fun bookFavorito(book: Book) {
+        bookViewModel.marcarODesmarcarFav(book)
+    }
+
 }

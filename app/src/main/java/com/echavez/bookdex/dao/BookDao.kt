@@ -26,8 +26,8 @@ interface BookDao {
     //fun getBookByAuthors(authors: List<Author>): List<LiveData<Book>>
 
 
-    @Query("SELECT * from book_table WHERE favourite= true")
-    fun getBooksByFavourite(): LiveData<List<Book>>
+    @Query("SELECT * from book_table WHERE favourite = :fav")
+    fun getBooksByFavourite(fav:Boolean): LiveData<List<Book>>
 
 
     //Get all
@@ -40,9 +40,9 @@ interface BookDao {
 
     //Check or unchek as favourite
     @Query("UPDATE book_table SET favourite = :preference WHERE isbn = :isbn")
-    fun favourite(isbn: String, preference: Boolean)
+    suspend fun favourite(isbn: String, preference: Boolean)
 
     @Query("DELETE FROM book_table")
-    fun deleteAll()
+    suspend fun deleteAll()
 
 }

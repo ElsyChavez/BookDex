@@ -73,6 +73,11 @@ public abstract class BookDexDatabase : RoomDatabase() {
             bookDao.insertBook(book)
             book = Book("2131244523", "http://4.bp.blogspot.com/-YYFDLFIvMGg/VYxRCfAibDI/AAAAAAAAAbc/oOVeVofRQBs/s1600/1984.jpg", "1984", "1ra", "El castillo", "En un futuro cercano distopico donde la tecnologia..", 2, false)
             bookDao.insertBook(book)
+            book = Book("9235256788", "https://imagessl2.casadellibro.com/a/l/t5/72/9788498890372.jpg", "El último deseo", "1ra", "Casa de timbre", "breves que preceden la serie principal de Geralt de Rivia", 2, true)
+            bookDao.insertBook(book)
+            book = Book("6548523432", "https://imagessl3.casadellibro.com/a/l/t5/33/9788498890433.jpg", "Espada del destino", "1ra", "Casa de timbre", "breves que preceden la serie principal de Geralt de Rivia", 1, false)
+            bookDao.insertBook(book)
+
 
         }
     }

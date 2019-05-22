@@ -4,13 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ExpandableListView
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 //import com.bumptech.glide.Glide
 import com.echavez.bookdex.R
+import com.echavez.bookdex.ViewModel.BookViewModel
 import com.echavez.bookdex.entities.Book
 import kotlinx.android.synthetic.main.cardview_libro.view.*
 
-class BooksAdapter internal  constructor(context: Context) : RecyclerView.Adapter<BooksAdapter.ViewHolder>() {
+class BooksAdapter internal  constructor(context: Context, val clickListener: (Book) -> Unit ) : RecyclerView.Adapter<BooksAdapter.ViewHolder>() {
      private var books: List<Book> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,7 +23,7 @@ class BooksAdapter internal  constructor(context: Context) : RecyclerView.Adapte
 
     override fun getItemCount() = books.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(books[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(books[position], clickListener)
 
     internal fun setBooks(books: List<Book>) {
         this.books = books
@@ -29,14 +32,15 @@ class BooksAdapter internal  constructor(context: Context) : RecyclerView.Adapte
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(book: Book) = with(itemView) {
-           // Glide.with(itemView.context)
-             //       .load(book.cover)
-               //     .into(IV_book_portada)
+        fun bind(book: Book, clickListener: (Book) -> Unit) = with(itemView) {
+            //Glide.with(itemView.context)
+              //      .load(book.cover)
+                //    .into(IV_book_portada)
             Tv_book_name.text = book.title
-
+            setFavorite.setOnClickListener {
+                clickListener(book)
+            }
         }
-
     }
 }
 

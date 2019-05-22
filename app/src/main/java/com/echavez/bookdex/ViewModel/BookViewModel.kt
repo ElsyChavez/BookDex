@@ -17,6 +17,7 @@ class BookViewModel(application:Application):AndroidViewModel(application) {
     private val tagRepository: TagRepository
     var allBooks: LiveData<List<Book>>
     val allTags: LiveData<List<Tag>>
+    var favBooks: LiveData<List<Book>>
     lateinit var booksByTag: LiveData<List<Book>>
 
     init {
@@ -26,6 +27,7 @@ class BookViewModel(application:Application):AndroidViewModel(application) {
         tagRepository = TagRepository(tagDao)
         allBooks = bookRepository.allBooks
         allTags = tagRepository.allTags
+        favBooks = bookRepository.favoritesBooks
     }
 
     fun insert(book: Book) = viewModelScope.launch(Dispatchers.IO) {
@@ -35,8 +37,7 @@ class BookViewModel(application:Application):AndroidViewModel(application) {
     fun getBooksbyTag(tag: String) = viewModelScope.launch(Dispatchers.IO) {
         booksByTag = tagRepository.getBooksByTag(tag)
     }
-
-    fun librosFavs() = viewModelScope.launch(Dispatchers.IO) {
-        allBooks = bookRepository.favoritesBooks
+    fun marcarODesmarcarFav(book: Book) = viewModelScope.launch(Dispatchers.IO) {
+        bookRepository.marcarODesmarcarFav(book)
     }
 }
