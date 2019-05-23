@@ -31,7 +31,7 @@ interface BookDao {
 
 
     //Get all
-    @Query("SELECT * from book_table ORDER BY isbn ASC")
+    @Query("SELECT * from book_table ORDER BY title ASC")
     fun getAllBooks(): LiveData<List<Book>>
 
     @Query("SELECT * from book_table WHERE isbn=0")
