@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     lateinit var bookViewModel: BookViewModel
     private var flag = true
+    private var switch = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             if (flag) {
                 bookViewModel.favBooks.observe(this, Observer { favBooks ->
                     bookAdapter.setBooks(favBooks)
+
                 })
                 btPrueba.text = "Cambiar a vista de todos"
             } else {

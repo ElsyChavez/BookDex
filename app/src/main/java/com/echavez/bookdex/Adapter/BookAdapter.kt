@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ExpandableListView
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 //import com.bumptech.glide.Glide
 //import com.bumptech.glide.Glide
 import com.echavez.bookdex.R
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.cardview_libro.view.*
 
 class BooksAdapter internal  constructor(context: Context, val clickListener: (Book) -> Unit ) : RecyclerView.Adapter<BooksAdapter.ViewHolder>() {
      private var books: List<Book> = emptyList()
+    public var switch = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.cardview_libro, parent, false)
@@ -34,13 +36,15 @@ class BooksAdapter internal  constructor(context: Context, val clickListener: (B
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(book: Book, clickListener: (Book) -> Unit) = with(itemView) {
-           // Glide.with(itemView.context)
-             //   .load(book.cover)
-               // .placeholder(R.drawable.ic_launcher_background)
-                //.into(Iv_book_portada)
+           Glide.with(itemView.context)
+                .load(book.cover)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(Iv_book_portada)
             Tv_book_name.text = book.title
+
             setFavorite.setOnClickListener {
                 clickListener(book)
+
             }
         }
     }
