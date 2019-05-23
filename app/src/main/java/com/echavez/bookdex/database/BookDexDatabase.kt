@@ -71,11 +71,14 @@ public abstract class BookDexDatabase : RoomDatabase() {
             authorDao.insertAuthor(aut)
             aut= Author(3, "Andrzej ", "Sapkowski")
             authorDao.insertAuthor(aut)
+            aut = Author(4, "Dante", "Alighieri")
+            authorDao.insertAuthor(aut)
 
             var tag = Tag( 1,"Ficcion" )
             tagDao.insertTag(tag)
             tag= Tag(2, "Politica" )
             tagDao.insertTag(tag)
+            tag= Tag(3,"Epopeya")
 
             var book = Book("4213432324", "https://www.abc.es/media/familia/2018/04/06/PORTADA-ELPRINCIPITO-kwpB--620x349@abc.JPG", "El principito", "1ra", "El castillo", "Cuenta la hisotira de un pequeño niño que..", 1,1, true)
             bookDao.insertBook(book)
@@ -85,6 +88,7 @@ public abstract class BookDexDatabase : RoomDatabase() {
             bookDao.insertBook(book)
             book = Book("6548523432", "https://imagessl3.casadellibro.com/a/l/t5/33/9788498890433.jpg", "Espada del destino", "1ra", "Casa de timbre", "breves que preceden la serie principal de Geralt de Rivia", 3,1, false)
             bookDao.insertBook(book)
+            book = Book("9789500398152","https://images-na.ssl-images-amazon.com/images/I/510SxGcsw-L._SX331_BO1,204,203,200_.jpg", "La Divina Comedia","1ra","LOSADA S.A., EDITORIAL","La travesia de Dante por los 9 circulos del infierno",4,3,true)
 
 
         }
