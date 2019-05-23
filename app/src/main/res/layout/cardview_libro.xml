@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/IV_book_portada"
+            android:id="@+id/Iv_book_portada"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
@@ -22,9 +22,9 @@
             android:id="@+id/Tv_book_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/IV_book_portada"
-            android:layout_alignRight="@id/IV_book_portada"
-            android:layout_alignBottom="@id/IV_book_portada"
+            android:layout_alignEnd="@id/Iv_book_portada"
+            android:layout_alignRight="@id/Iv_book_portada"
+            android:layout_alignBottom="@id/Iv_book_portada"
             android:layout_margin="16dp"
             android:background="#65000000"
             android:gravity="end"
