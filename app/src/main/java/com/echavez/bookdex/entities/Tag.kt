@@ -9,7 +9,7 @@ data class Tag(
 
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = "id")
-        var id: Long?= 0,
+        var id: Int?= 0,
 
         @ColumnInfo(name = "tag")
         var tag: String

@@ -16,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-@Database(entities = arrayOf(Book::class, Author::class, Tag::class), version = 1)
+@Database(entities = arrayOf(Book::class, Author::class, Tag::class), version = 4)
 public abstract class BookDexDatabase : RoomDatabase() {
 
     abstract fun bookDao(): BookDao
@@ -63,19 +63,27 @@ public abstract class BookDexDatabase : RoomDatabase() {
         suspend fun populateDatabase(bookDao: BookDao , tagDao: TagDao, authorDao: AuthorDao) {
             bookDao.deleteAll()
             tagDao.deleteAll()
+            authorDao.deleteAll()
 
-            var tag = Tag( null,"Ficcion" )
+            var aut= Author(1, "Gabriel", "Garcia Marquez")
+            authorDao.insertAuthor(aut)
+            aut= Author(2, "Fidor", "Dotstovieski")
+            authorDao.insertAuthor(aut)
+            aut= Author(3, "Andrzej ", "Sapkowski")
+            authorDao.insertAuthor(aut)
+
+            var tag = Tag( 1,"Ficcion" )
             tagDao.insertTag(tag)
-            tag= Tag(0, "Politica" )
+            tag= Tag(2, "Politica" )
             tagDao.insertTag(tag)
 
-            var book = Book("4213432324", "https://www.abc.es/media/familia/2018/04/06/PORTADA-ELPRINCIPITO-kwpB--620x349@abc.JPG", "El principito", "1ra", "El castillo", "Cuenta la hisotira de un pequeño niño que..", 1, true)
+            var book = Book("4213432324", "https://www.abc.es/media/familia/2018/04/06/PORTADA-ELPRINCIPITO-kwpB--620x349@abc.JPG", "El principito", "1ra", "El castillo", "Cuenta la hisotira de un pequeño niño que..", 1,1, true)
             bookDao.insertBook(book)
-            book = Book("2131244523", "http://4.bp.blogspot.com/-YYFDLFIvMGg/VYxRCfAibDI/AAAAAAAAAbc/oOVeVofRQBs/s1600/1984.jpg", "1984", "1ra", "El castillo", "En un futuro cercano distopico donde la tecnologia..", 2, false)
+            book = Book("2131244523", "http://4.bp.blogspot.com/-YYFDLFIvMGg/VYxRCfAibDI/AAAAAAAAAbc/oOVeVofRQBs/s1600/1984.jpg", "1984", "1ra", "El castillo", "En un futuro cercano distopico donde la tecnologia..", 1,2, false)
             bookDao.insertBook(book)
-            book = Book("9235256788", "https://imagessl2.casadellibro.com/a/l/t5/72/9788498890372.jpg", "El último deseo", "1ra", "Casa de timbre", "breves que preceden la serie principal de Geralt de Rivia", 2, true)
+            book = Book("9235256788", "https://imagessl2.casadellibro.com/a/l/t5/72/9788498890372.jpg", "El último deseo", "1ra", "Casa de timbre", "breves que preceden la serie principal de Geralt de Rivia", 3,2, true)
             bookDao.insertBook(book)
-            book = Book("6548523432", "https://imagessl3.casadellibro.com/a/l/t5/33/9788498890433.jpg", "Espada del destino", "1ra", "Casa de timbre", "breves que preceden la serie principal de Geralt de Rivia", 1, false)
+            book = Book("6548523432", "https://imagessl3.casadellibro.com/a/l/t5/33/9788498890433.jpg", "Espada del destino", "1ra", "Casa de timbre", "breves que preceden la serie principal de Geralt de Rivia", 3,1, false)
             bookDao.insertBook(book)
 
 
