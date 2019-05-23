@@ -1,5 +1,6 @@
 package com.echavez.bookdex.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,11 +17,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var bookViewModel: BookViewModel
     private var flag = true
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var bookAdapter = BooksAdapter(this) { book:Book->bookFavorito(book)}
+        //var bookAdapter = BooksAdapter(this) { book:Book->bookOnClicked(book)}
         rvLibritos.adapter = bookAdapter
         rvLibritos.layoutManager = LinearLayoutManager(this)
 
@@ -51,6 +52,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun bookFavorito(book: Book) {
         bookViewModel.marcarODesmarcarFav(book)
+    }
+
+
+    private fun bookOnClicked(book: Book) {
+        startActivity(Intent(this, BookViewerActivity::class.java).putExtra("LIBRITO", book.title))
     }
 
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BookDex</string>
+    <string name="empty_text">N/A</string>
 </resources>
