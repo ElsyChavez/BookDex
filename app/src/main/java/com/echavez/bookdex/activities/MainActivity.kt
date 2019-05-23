@@ -27,9 +27,12 @@ class MainActivity : AppCompatActivity() {
 
         bookViewModel = ViewModelProviders.of(this).get(BookViewModel::class.java)
 
+
+
         bookViewModel.allBooks.observe(this, Observer { books ->
             bookAdapter.setBooks(books)
         })
+
         Log.v("cantidad", bookAdapter.itemCount.toString())
 
 
@@ -47,6 +50,16 @@ class MainActivity : AppCompatActivity() {
                 btPrueba.text = "Cambiar a Favoritos"
             }
             flag = !flag
+        }
+
+        BtBuscar.setOnClickListener(){
+
+            bookViewModel.getBooksbyTag(ETbuscar.text.toString())
+
+            bookViewModel.booksByTag.observe(this, Observer { books->
+                bookAdapter.setBooks(books)
+            })
+
         }
     }
 

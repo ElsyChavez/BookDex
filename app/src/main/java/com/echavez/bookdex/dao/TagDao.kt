@@ -8,7 +8,7 @@ import com.echavez.bookdex.entities.Tag
 
 @Dao
 interface TagDao {
-    @Query("SELECT bt.* from book_table bt INNER JOIN tag_table tt ON bt.tag=tt.id WHERE tt.tag= :tag ORDER BY tt.tag ASC")
+    @Query("SELECT bt.* from book_table bt LEFT JOIN tag_table tt ON bt.tag=tt.id WHERE tt.tag= :tag ORDER BY tt.tag ASC")
     fun getBooksbyTag(tag: String): LiveData<List<Book>>
 
     @Query("SELECT * from tag_table ORDER BY tag ASC")

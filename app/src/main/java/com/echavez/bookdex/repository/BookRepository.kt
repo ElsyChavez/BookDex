@@ -9,15 +9,17 @@ class BookRepository(private val bookDao: BookDao) {
 
     val allBooks: LiveData<List<Book>> = bookDao.getAllBooks()
     val favoritesBooks: LiveData<List<Book>> = bookDao.getBooksByFavourite(true)
+    val initList: LiveData<List<Book>> = bookDao.initList()
 
     @WorkerThread
-    suspend fun insert(book: Book) {
+     fun insert(book: Book) {
         bookDao.insertBook(book)
     }
 
     @WorkerThread
-    suspend fun marcarODesmarcarFav(book: Book) {
+    fun marcarODesmarcarFav(book: Book) {
         var flag= !book.favourite
         bookDao.favourite(book.isbn, flag)
     }
+
 }

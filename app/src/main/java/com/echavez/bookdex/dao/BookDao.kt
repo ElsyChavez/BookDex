@@ -34,13 +34,16 @@ interface BookDao {
     @Query("SELECT * from book_table ORDER BY isbn ASC")
     fun getAllBooks(): LiveData<List<Book>>
 
+    @Query("SELECT * from book_table WHERE isbn=0")
+    fun initList(): LiveData<List<Book>>
+
     //Insert
     @Insert
-    suspend fun insertBook(book: Book)
+    fun insertBook(book: Book)
 
     //Check or unchek as favourite
     @Query("UPDATE book_table SET favourite = :preference WHERE isbn = :isbn")
-    suspend fun favourite(isbn: String, preference: Boolean)
+    fun favourite(isbn: String, preference: Boolean)
 
     @Query("DELETE FROM book_table")
     suspend fun deleteAll()

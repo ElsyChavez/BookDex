@@ -13,7 +13,7 @@ class TagRepository(private val tagDao: TagDao) {
         tagDao.insertTag(tag)
     }
     @WorkerThread
-    suspend fun getBooksByTag(tag: String): LiveData<List<Book>>{
+    fun getBooksByTag(tag: String): LiveData<List<Book>>{
         return tagDao.getBooksbyTag(tag)
     }
 
