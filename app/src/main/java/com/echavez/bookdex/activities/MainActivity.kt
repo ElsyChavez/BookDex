@@ -1,4 +1,4 @@
-package com.echavez.bookdex
+package com.echavez.bookdex.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.echavez.bookdex.Adapter.BooksAdapter
+import com.echavez.bookdex.R
 import com.echavez.bookdex.ViewModel.BookViewModel
 import com.echavez.bookdex.entities.Book
 import kotlinx.android.synthetic.main.activity_main.*
