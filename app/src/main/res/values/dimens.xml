@@ -3,5 +3,6 @@
     <dimen name="medium_letter">18sp</dimen>
     <dimen name="small_margin">15dp</dimen>
     <dimen name="average_margin">25dp</dimen>
-    <dimen name="somewhat_big_letter">45sp</dimen>
+    <dimen name="somewhat_big_letter">40sp</dimen>
+    <dimen name="margin_35">35dp</dimen>
 </resources>

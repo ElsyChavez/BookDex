@@ -9,7 +9,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -19,24 +20,24 @@
             <ImageView
                 android:id="@+id/Iv_book_cover"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="325dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher_background"
                 android:layout_marginBottom="25dp"/>
 
             <TextView
                 android:id="@+id/tv_book_namae"
-                android:layout_alignLeft="@id/Iv_book_cover"
-                android:layout_alignBottom="@id/Iv_book_cover"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/empty_text"
                 android:textSize="@dimen/somewhat_big_letter"
-                android:textColor="@color/white_color"
+                android:textColor="@android:color/black"
                 android:textStyle="bold"
+                android:layout_below="@id/Iv_book_cover"
                 android:layout_marginBottom="@dimen/small_margin"
                 android:layout_marginLeft="@dimen/average_margin"
                 android:fontFamily="sans-serif-light"
+                android:layout_marginRight="@dimen/average_margin"
                 />
 
             <TextView
@@ -45,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:text="Autor: "
                 android:textSize="@dimen/medium_letter"
-                android:layout_below="@+id/Iv_book_cover"
+                android:layout_below="@+id/tv_book_namae"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
                 android:layout_marginLeft="@dimen/average_margin"
@@ -59,7 +60,7 @@
                 android:text="@string/empty_text"
                 android:layout_alignParentRight="true"
                 android:layout_toRightOf="@id/textview2"
-                android:layout_below="@id/Iv_book_cover"
+                android:layout_below="@id/tv_book_namae"
                 android:textSize="@dimen/medium_letter"
                 android:textColor="@android:color/black"
                 android:layout_marginRight="@dimen/average_margin"
@@ -163,7 +164,7 @@
                 android:textColor="@android:color/black"
                 android:layout_marginLeft="@dimen/average_margin"
                 android:layout_marginTop="@dimen/small_margin"
-                android:layout_marginBottom="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/margin_35"
                 android:fontFamily="sans-serif-light"/>
 
             <TextView
@@ -179,7 +180,7 @@
                 android:layout_marginTop="@dimen/small_margin"
                 android:layout_marginRight="@dimen/average_margin"
                 android:fontFamily="sans-serif-light"
-                android:layout_marginBottom="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/margin_35"
                 />
 
         </RelativeLayout>
