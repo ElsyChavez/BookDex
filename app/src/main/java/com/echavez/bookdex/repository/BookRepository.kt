@@ -4,6 +4,7 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.echavez.bookdex.dao.BookDao
 import com.echavez.bookdex.entities.Book
+import com.echavez.bookdex.entities.joinedBook
 
 class BookRepository(private val bookDao: BookDao) {
 
@@ -20,6 +21,11 @@ class BookRepository(private val bookDao: BookDao) {
     fun marcarODesmarcarFav(book: Book) {
         var flag= !book.favourite
         bookDao.favourite(book.isbn, flag)
+    }
+
+    @WorkerThread
+    fun getJoinedBook(book: Book): LiveData<joinedBook>{
+        return bookDao.getJoinedBook(book.isbn)
     }
 
 }

@@ -68,12 +68,41 @@
                 />
 
             <TextView
+                android:id="@+id/textview2.5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apellido autor: "
+                android:textSize="@dimen/medium_letter"
+                android:layout_below="@+id/textview2"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="@dimen/average_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:fontFamily="sans-serif-light"/>
+
+            <TextView
+                android:id="@+id/tv_author_lastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_text"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/textview2.5"
+                android:layout_below="@id/tv_author_name"
+                android:textSize="@dimen/medium_letter"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginRight="@dimen/average_margin"
+                android:fontFamily="sans-serif-light"
+
+                />
+
+            <TextView
                 android:id="@+id/textview3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ISBN: "
                 android:textSize="@dimen/medium_letter"
-                android:layout_below="@+id/tv_author_name"
+                android:layout_below="@+id/tv_author_lastName"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
                 android:layout_marginLeft="@dimen/average_margin"
@@ -87,7 +116,7 @@
                 android:text="@string/empty_text"
                 android:layout_alignParentRight="true"
                 android:layout_toRightOf="@id/textview3"
-                android:layout_below="@id/tv_author_name"
+                android:layout_below="@id/tv_author_lastName"
                 android:textSize="@dimen/medium_letter"
                 android:textColor="@android:color/black"
                 android:layout_marginTop="@dimen/small_margin"
@@ -175,6 +204,34 @@
                 android:layout_alignParentRight="true"
                 android:layout_toRightOf="@id/textview6"
                 android:layout_below="@id/tv_book_editorial"
+                android:textSize="@dimen/medium_letter"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginRight="@dimen/average_margin"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginBottom="@dimen/margin_35"
+                />
+            <TextView
+                android:id="@+id/textview7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Resumen: "
+                android:textSize="@dimen/medium_letter"
+                android:layout_below="@+id/tv_book_resumen"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="@dimen/average_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/margin_35"
+                android:fontFamily="sans-serif-light"/>
+            <TextView
+                android:id="@+id/tv_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_text"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/textview7"
+                android:layout_below="@id/tv_book_resumen"
                 android:textSize="@dimen/medium_letter"
                 android:textColor="@android:color/black"
                 android:layout_marginTop="@dimen/small_margin"

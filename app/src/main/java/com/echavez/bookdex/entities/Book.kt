@@ -19,8 +19,8 @@ data class Book(
         @ColumnInfo(name = "edition") val edition: String,
         @ColumnInfo(name = "editorial") val editorial: String,
         @ColumnInfo(name = "summary") val summary: String,
-        @ColumnInfo(name = "author") val author: Int,
-        @ColumnInfo(name = "tag") val tag: Int,  //Trae como fk de la tabla Tag
+        @ColumnInfo(name = "author") val author: Int?,  //Fk tabla Author
+        @ColumnInfo(name = "tag") val tag: Int?,  //Trae como fk de la tabla Tag
         @ColumnInfo(name = "favourite") val favourite: Boolean
 ):Parcelable {
     constructor(parcel: Parcel) : this(
@@ -30,8 +30,8 @@ data class Book(
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readInt(),
-            parcel.readInt(),
+            parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readValue(Int::class.java.classLoader) as? Int,
             parcel.readByte() != 0.toByte()) {
     }
 
@@ -42,8 +42,8 @@ data class Book(
         parcel.writeString(edition)
         parcel.writeString(editorial)
         parcel.writeString(summary)
-        parcel.writeInt(author)
-        parcel.writeInt(tag)
+        parcel.writeValue(author)
+        parcel.writeValue(tag)
         parcel.writeByte(if (favourite) 1 else 0)
     }
 

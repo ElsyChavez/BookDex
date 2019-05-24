@@ -16,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-@Database(entities = arrayOf(Book::class, Author::class, Tag::class), version = 4)
+@Database(entities = arrayOf(Book::class, Author::class, Tag::class), version = 7)
 public abstract class BookDexDatabase : RoomDatabase() {
 
     abstract fun bookDao(): BookDao
