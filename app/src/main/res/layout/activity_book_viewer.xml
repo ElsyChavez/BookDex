@@ -163,6 +163,7 @@
                 android:textColor="@android:color/black"
                 android:layout_marginLeft="@dimen/average_margin"
                 android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
                 android:fontFamily="sans-serif-light"/>
 
             <TextView
@@ -178,6 +179,7 @@
                 android:layout_marginTop="@dimen/small_margin"
                 android:layout_marginRight="@dimen/average_margin"
                 android:fontFamily="sans-serif-light"
+                android:layout_marginBottom="@dimen/small_margin"
                 />
 
         </RelativeLayout>

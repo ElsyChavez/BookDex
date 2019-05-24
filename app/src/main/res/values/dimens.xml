@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="medium_letter">23sp</dimen>
+    <dimen name="medium_letter">18sp</dimen>
     <dimen name="small_margin">15dp</dimen>
     <dimen name="average_margin">25dp</dimen>
     <dimen name="somewhat_big_letter">45sp</dimen>
