@@ -1,5 +1,7 @@
 package com.echavez.bookdex.entities
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -20,4 +22,42 @@ data class Book(
         @ColumnInfo(name = "author") val author: Int,
         @ColumnInfo(name = "tag") val tag: Int,  //Trae como fk de la tabla Tag
         @ColumnInfo(name = "favourite") val favourite: Boolean
-)
+):Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readInt(),
+            parcel.readInt(),
+            parcel.readByte() != 0.toByte()) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(isbn)
+        parcel.writeString(cover)
+        parcel.writeString(title)
+        parcel.writeString(edition)
+        parcel.writeString(editorial)
+        parcel.writeString(summary)
+        parcel.writeInt(author)
+        parcel.writeInt(tag)
+        parcel.writeByte(if (favourite) 1 else 0)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Book> {
+        override fun createFromParcel(parcel: Parcel): Book {
+            return Book(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Book?> {
+            return arrayOfNulls(size)
+        }
+    }
+}

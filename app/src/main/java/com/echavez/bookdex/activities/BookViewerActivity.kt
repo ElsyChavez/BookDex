@@ -14,6 +14,10 @@ class BookViewerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_viewer)
 
+        val libroDeserealizado: Book? = intent.extras.getParcelable("LIBRO")
+        if(libroDeserealizado!=null){
+            init(libroDeserealizado)
+        }
     }
 
     fun init(book: Book){

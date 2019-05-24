@@ -21,7 +21,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var bookAdapter = BooksAdapter(this) { book:Book->bookFavorito(book)}
+        var bookAdapter = BooksAdapter(this, {book:Book->bookFavorito(book)}, {book:Book->triggerActivity(book)} )
+
+
         //var bookAdapter = BooksAdapter(this) { book:Book->bookOnClicked(book)}
         rvLibritos.adapter = bookAdapter
         rvLibritos.layoutManager = LinearLayoutManager(this)
@@ -65,13 +67,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun bookFavorito(book: Book) {
-        bookViewModel.marcarODesmarcarFav(book)
+    private fun triggerActivity(book: Book) {
+        val libroBundle = Bundle()
+        libroBundle.putParcelable("LIBRO", book)
+        startActivity(Intent(this, BookViewerActivity::class.java).putExtras(libroBundle))
+
     }
 
-
-    private fun bookOnClicked(book: Book) {
-        startActivity(Intent(this, BookViewerActivity::class.java).putExtra("LIBRITO", book.title))
+    private fun bookFavorito(book: Book) {
+        bookViewModel.marcarODesmarcarFav(book)
     }
 
 }
