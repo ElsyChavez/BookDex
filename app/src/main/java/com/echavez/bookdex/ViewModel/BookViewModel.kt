@@ -1,12 +1,14 @@
 package com.echavez.bookdex.ViewModel
 
 import android.app.Application
+import android.app.DownloadManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.echavez.bookdex.database.BookDexDatabase
 import com.echavez.bookdex.entities.Book
 import com.echavez.bookdex.entities.Tag
+import com.echavez.bookdex.entities.joinedBook
 import com.echavez.bookdex.repository.AuthorRepository
 import com.echavez.bookdex.repository.BookRepository
 import com.echavez.bookdex.repository.TagRepository
@@ -20,7 +22,8 @@ class BookViewModel(application:Application):AndroidViewModel(application) {
     var allBooks: LiveData<List<Book>>
     val allTags: LiveData<List<Tag>>
     var favBooks: LiveData<List<Book>>
-     var booksByTag: LiveData<List<Book>>
+    var booksByTag: LiveData<List<Book>>
+    var libroActivity = joinedBook("", "","", "", "", "","", "","",false)
     // var booksByauthor: LiveData<List<Book>>
 
     init {
@@ -50,5 +53,8 @@ class BookViewModel(application:Application):AndroidViewModel(application) {
     }
     fun marcarODesmarcarFav(book: Book) = viewModelScope.launch(Dispatchers.IO) {
         bookRepository.marcarODesmarcarFav(book)
+    }
+    fun getJoinedBook(book: Book)= viewModelScope.launch(Dispatchers.IO) {
+        libroActivity = bookRepository.getJoinedBook(book)
     }
 }

@@ -8,6 +8,7 @@ import androidx.room.Update
 import com.echavez.bookdex.entities.Author
 import com.echavez.bookdex.entities.Book
 import com.echavez.bookdex.entities.Tag
+import com.echavez.bookdex.entities.joinedBook
 
 @Dao
 interface BookDao {
@@ -37,6 +38,7 @@ interface BookDao {
     @Query("SELECT * from book_table WHERE isbn=0")
     fun initList(): LiveData<List<Book>>
 
+
     //Insert
     @Insert
     fun insertBook(book: Book)
@@ -48,4 +50,6 @@ interface BookDao {
     @Query("DELETE FROM book_table")
     suspend fun deleteAll()
 
+    @Query("SELECT bt.isbn, bt.cover, bt.title, bt.edition, bt.editorial, bt.summary, at.name as name_author , at.last_name as lastName_author, tt.tag as tag ,bt.favourite FROM book_table bt JOIN author_table at ON bt.author=at.id JOIN tag_table tt ON bt.tag=tt.id WHERE bt.isbn = :isbn")
+    fun getJoinedBook(isbn: String): joinedBook
 }

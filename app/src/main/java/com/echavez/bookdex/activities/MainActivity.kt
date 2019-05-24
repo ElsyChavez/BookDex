@@ -11,6 +11,7 @@ import com.echavez.bookdex.Adapter.BooksAdapter
 import com.echavez.bookdex.R
 import com.echavez.bookdex.ViewModel.BookViewModel
 import com.echavez.bookdex.entities.Book
+import com.echavez.bookdex.entities.joinedBook
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
