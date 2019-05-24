@@ -21,12 +21,10 @@ class BookViewerActivity : AppCompatActivity() {
 
         val libroDeserealizado: Book? = intent.extras.getParcelable("LIBRO")
         if(libroDeserealizado!=null){
-            bookViewModel.getJoinedBook(libroDeserealizado)
-            while(bookViewModel.libroActivity.isbn.isNullOrEmpty()){ //HORRENDAMENTE HECHIZO
-
-            }
-            init(bookViewModel.libroActivity)
-           // init(libroDeserealizado)
+            bookViewModel.getJoinedBook(libroDeserealizado).observe(this, Observer {
+                book : joinedBook ->
+                init(book)
+            })
         }
     }
 

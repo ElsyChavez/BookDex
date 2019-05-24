@@ -22,9 +22,7 @@ class BookViewModel(application:Application):AndroidViewModel(application) {
     var allBooks: LiveData<List<Book>>
     val allTags: LiveData<List<Tag>>
     var favBooks: LiveData<List<Book>>
-    var booksByTag: LiveData<List<Book>>
     var libroActivity = joinedBook("", "","", "", "", "","", "","",false)
-    // var booksByauthor: LiveData<List<Book>>
 
     init {
         val booksDao = BookDexDatabase.getDatabase(application, viewModelScope).bookDao()
@@ -37,24 +35,23 @@ class BookViewModel(application:Application):AndroidViewModel(application) {
         allBooks = bookRepository.allBooks
         allTags = tagRepository.allTags
         favBooks = bookRepository.favoritesBooks
-        booksByTag= bookRepository.initList
-        // booksByauthor=bookRepository.initList
+
     }
 
     fun insert(book: Book) = viewModelScope.launch(Dispatchers.IO) {
         bookRepository.insert(book)
     }
 
-    fun getBooksbyTag(tag: String)= viewModelScope.launch(Dispatchers.IO) {
-        booksByTag=tagRepository.getBooksByTag(tag)
+    fun getBooksbyTag(tag: String): LiveData<List<Book>>{
+        return tagRepository.getBooksByTag(tag)
     }
-    fun getBooksbyAuthor(author: String) = viewModelScope.launch(Dispatchers.IO) {
-        //booksByauthor=authorRepository.getBooksByAuthor(author)
+    fun getBooksbyAuthor(author: String) : LiveData<List<Book>>{
+        return authorRepository.getBooksByAuthor(author)
     }
     fun marcarODesmarcarFav(book: Book) = viewModelScope.launch(Dispatchers.IO) {
         bookRepository.marcarODesmarcarFav(book)
     }
-    fun getJoinedBook(book: Book)= viewModelScope.launch(Dispatchers.IO) {
-        libroActivity = bookRepository.getJoinedBook(book)
+    fun getJoinedBook(book: Book): LiveData<joinedBook>{
+       return bookRepository.getJoinedBook(book)
     }
 }

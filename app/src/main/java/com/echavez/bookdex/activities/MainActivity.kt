@@ -18,11 +18,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var bookViewModel: BookViewModel
     private var flag = true
     private var switch = true
+    private lateinit var bookAdapter: BooksAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var bookAdapter = BooksAdapter(this, {book:Book->bookFavorito(book)}, {book:Book->triggerActivity(book)} )
+        bookAdapter = BooksAdapter(this, { book: Book -> bookFavorito(book) }, { book: Book -> triggerActivity(book) })
 
 
         //var bookAdapter = BooksAdapter(this) { book:Book->bookOnClicked(book)}
@@ -36,35 +37,36 @@ class MainActivity : AppCompatActivity() {
         bookViewModel.allBooks.observe(this, Observer { books ->
             bookAdapter.setBooks(books)
         })
+        initClicksListeners()
+    }
 
-        Log.v("cantidad", bookAdapter.itemCount.toString())
+    private fun initClicksListeners(){
+        btFavoritos.setOnClickListener(){
+            bookViewModel.favBooks.observe(this, Observer { favBooks ->
+                bookAdapter.setBooks(favBooks)
 
-
-
-        btPrueba.setOnClickListener() {
-            if (flag) {
-                bookViewModel.favBooks.observe(this, Observer { favBooks ->
-                    bookAdapter.setBooks(favBooks)
-
-                })
-                btPrueba.text = "Cambiar a vista de todos"
-            } else {
-                bookViewModel.allBooks.observe(this, Observer { books ->
-                    bookAdapter.setBooks(books)
-                })
-                btPrueba.text = "Cambiar a Favoritos"
-            }
-            flag = !flag
+            })
         }
-
-        BtBuscar.setOnClickListener(){
-
-            bookViewModel.getBooksbyTag(ETbuscar.text.toString())
-
-            bookViewModel.booksByTag.observe(this, Observer { books->
+        btAllBooks.setOnClickListener(){
+            bookViewModel.allBooks.observe(this, Observer { books ->
                 bookAdapter.setBooks(books)
             })
+        }
+        BtBuscar.setOnClickListener() {
+            var flag = 0
+            bookViewModel.getBooksbyTag(ETbuscar.text.toString()).observe(this, Observer { books: List<Book> ->
+                if (books.isEmpty()) {
+                    flag = 1
+                }
+                bookAdapter.setBooks(books)
+            })
+            if (flag == 1) {
 
+                bookViewModel.getBooksbyAuthor(ETbuscar.text.toString()).observe(this, Observer { books: List<Book> ->
+                    bookAdapter.setBooks(books)
+                })
+
+            }
         }
     }
 
@@ -76,6 +78,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bookFavorito(book: Book) {
+        bookViewModel.favBooks.observe(this, Observer { favBooks ->
+            bookAdapter.setBooks(favBooks)
+
+        })
         bookViewModel.marcarODesmarcarFav(book)
     }
 

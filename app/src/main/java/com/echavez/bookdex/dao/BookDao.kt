@@ -51,5 +51,5 @@ interface BookDao {
     suspend fun deleteAll()
 
     @Query("SELECT bt.isbn, bt.cover, bt.title, bt.edition, bt.editorial, bt.summary, at.name as name_author , at.last_name as lastName_author, tt.tag as tag ,bt.favourite FROM book_table bt JOIN author_table at ON bt.author=at.id JOIN tag_table tt ON bt.tag=tt.id WHERE bt.isbn = :isbn")
-    fun getJoinedBook(isbn: String): joinedBook
+    fun getJoinedBook(isbn: String): LiveData<joinedBook>
 }

@@ -24,7 +24,7 @@ class BookRepository(private val bookDao: BookDao) {
     }
 
     @WorkerThread
-    fun getJoinedBook(book: Book): joinedBook{
+    fun getJoinedBook(book: Book): LiveData<joinedBook>{
         return bookDao.getJoinedBook(book.isbn)
     }
 
