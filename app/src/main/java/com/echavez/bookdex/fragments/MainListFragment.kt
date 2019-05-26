@@ -1,103 +1,92 @@
 package com.echavez.bookdex.fragments
 
 import android.content.Context
-import android.net.Uri
+import android.content.res.Configuration
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.echavez.bookdex.Adapter.AppConstants
+import com.echavez.bookdex.Adapter.BookSimpleListAdapter
+import com.echavez.bookdex.Adapter.BooksAdapter
+import com.echavez.bookdex.Adapter.MyBookAdapter
 import com.echavez.bookdex.R
+import com.echavez.bookdex.activities.MainActivity
+import com.echavez.bookdex.entities.Book
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class MainListFragment: Fragment(){
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [MainListFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [MainListFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class MainListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+    private lateinit var  books :ArrayList<Book>
+    private lateinit var booksAdapter : MyBookAdapter
+    var listenerTool :  SearchNewBookListener? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    companion object {
+        fun newInstance(dataset : ArrayList<Book>): MainListFragment{
+            val newFragment = MainListFragment()
+            newFragment.books = dataset
+            return newFragment
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_list, container, false)
+    interface SearchNewBookListener{
+        fun searchBook(bookName: String)
+
+        fun managePortraitItemClick(book: Book)
+
+        fun manageLandscapeItemClick(book: Book)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
+        val view = inflater.inflate(R.layout.fragment_main_list, container, false)
+
+        if(savedInstanceState != null) books = savedInstanceState.getParcelableArrayList<Book>(AppConstants.MAIN_LIST_KEY)!!
+
+        //initRecyclerView(resources.configuration.orientation, view)
+        //initSearchButton(view)
+
+        return view
     }
 
-    override fun onAttach(context: Context) {
+    /*?
+    fun initRecyclerView(orientation:Int, container: View){
+        val linearLayoutManager = LinearLayoutManager(this.context)
+
+        if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+            moviesAdapter = BookSimpleListAdapter(, { movie:Movie->listenerTool?.manageLandscapeItemClick(movie)})
+            container.movie_list_rv.adapter = moviesAdapter as MovieSimpleListAdapter
+        }
+
+        container.movie_list_rv.apply {
+            setHasFixedSize(true)
+            layoutManager = linearLayoutManager
+        }
+    }
+
+    */
+
+
+    fun updateMoviesAdapter(movieList: ArrayList<Book>){ booksAdapter.changeDataSet(movieList) }
+/*
+    override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
+        if (context is SearchNewBookListener) {
+            listenerTool = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+            throw RuntimeException("Se necesita una implementación de  la interfaz")
         }
+    }
+    */
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList(AppConstants.MAIN_LIST_KEY, books)
+        super.onSaveInstanceState(outState)
     }
 
     override fun onDetach() {
         super.onDetach()
-        listener = null
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MainListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MainListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        listenerTool = null
     }
 }
